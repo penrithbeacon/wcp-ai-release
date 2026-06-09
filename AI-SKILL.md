@@ -26,7 +26,42 @@ pipeline on an artefact that has not passed its build verification steps.
 
 ## 2. Skill: Determine What to Release
 
-Ask the developer what they have built and are ready to release:
+### Step 1 — Establish release stage and mode
+
+Before routing to any specialist skill, ask the developer two questions:
+
+**Question A — Release stage:**
+
+> _"Is this a beta release (first public release, for broader testing) or a
+> production release (stable, ready for general use)?"_
+
+| Stage | Meaning | Docker Hub tags | GitHub repo |
+|-------|---------|----------------|-------------|
+| **Beta** | First public release; graduating from alpha kiosk to beta kiosk | `{version}-beta`, `beta` | Public on penrithbeacon |
+| **Release** | Production release; graduating from beta kiosk to release kiosk | `{version}`, `latest` | Public on penrithbeacon |
+
+**Question B — Release mode:**
+
+> _"Would you like to run a dry run first (validates everything but does not push
+> publicly), or go straight to a live release?"_
+
+| Mode | Meaning |
+|------|---------|
+| **Dry run** | Executes every step — builds, audits, generates all documents — but does **not** push to public GitHub or Docker Hub. Proves release-readiness without publishing. Reports exactly what a live release would do. |
+| **Live** | Full execution. All public pushes are made. After a live release, the artefact is publicly available. |
+
+Record both answers. They flow through to the specialist release skill and govern
+whether publication steps are executed or reported-only.
+
+**Recommended flow for a first release:**
+1. Run a **dry-run beta release** — validate everything is in order
+2. Fix any issues found
+3. Run a **live beta release** — publish to Docker Hub as beta, launch from beta kiosk
+4. Test in beta; iterate as needed
+5. Run a **dry-run release** — validate production readiness
+6. Run a **live release** — publish as stable
+
+### Step 2 — Route to the specialist skill
 
 | Developer has built | Route to |
 |--------------------|----------|
@@ -38,10 +73,10 @@ Ask the developer what they have built and are ready to release:
 **Before routing, confirm** the developer has these items ready:
 - Credentials file path (GitHub PAT + Docker Hub token)
 - Artefact name, GitHub path, and (for widgets) Docker Hub path
-- Confirmed: all build verification steps passed
+- Confirmed: alpha kiosk QA is complete and the widget is ready to graduate
 
-**Announce the routing decision** before proceeding, so the developer can
-correct you if you have misidentified the artefact type.
+**Announce the routing decision** — state the stage, mode, and artefact type before
+proceeding so the developer can correct you if anything is wrong.
 
 ---
 
