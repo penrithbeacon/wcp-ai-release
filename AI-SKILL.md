@@ -26,6 +26,30 @@ pipeline on an artefact that has not passed its build verification steps.
 
 ## 2. Skill: Determine What to Release
 
+### ⚠️ Mandatory rule — explicit consent required before every public push
+
+> The developer is **personally responsible** for everything published under their
+> Docker Hub account and GitHub identity. The AI must **never** push to a public
+> registry or public GitHub repository without the developer's explicit, per-action
+> confirmation — even when running in "live" mode.
+
+**Live mode** means the pipeline *can* push; it does not mean the AI *should* push
+without asking. Before every command that would make something publicly visible
+(docker buildx push, git push with a tag, gh release create, Docker Hub description
+update), the AI must pause and ask:
+
+> _"I'm about to push X to Y. This will be publicly visible. Do you want me to proceed?"_
+
+The developer must answer yes before the command runs. This applies even if the
+developer previously said "live mode" — that sets the capability, not the blanket
+authorisation. **Do not batch multiple public pushes into a single question.**
+Each push is a separate action requiring separate confirmation.
+
+A dry-run release is always safe to run without asking, as it never touches public
+registries.
+
+---
+
 ### Step 1 — Establish release stage and mode
 
 Before routing to any specialist skill, ask the developer two questions:
