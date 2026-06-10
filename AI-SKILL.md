@@ -5,6 +5,39 @@
 
 ---
 
+## 0. Universal Pipeline Rules
+
+These rules apply to every release pipeline, regardless of artefact type.
+They override any conflicting guidance in specialist sub-skills.
+
+### 0.1 Explicit consent before every public push
+
+> The developer is **personally responsible** for everything published under their
+> identity. **Never push to a public registry or repository without explicit,
+> per-action confirmation** — even in "live" mode. Each push is a separate consent
+> action.
+
+### 0.2 Mandatory completion summary
+
+> **Every release pipeline, whether dry-run or live, MUST end with a written
+> results summary delivered to the developer.** The developer cannot verify
+> outcomes they did not personally observe. The AI must not assume the developer
+> inferred the outcome from watching commands scroll past.
+
+The summary must:
+- State the artefact name and version released (or dry-run simulated)
+- State the mode (Dry Run / Live) and stage (Beta / Release)
+- List every public action taken with its result (✅ success / ⚠ warning / ❌ failure)
+- Provide direct URLs to everything now publicly accessible (live mode)
+- State clearly if anything was skipped or failed
+- End with: **"The release pipeline is now complete. You (the developer) are responsible
+  for everything now publicly visible."** (live mode) or **"Nothing was published
+  publicly — run a live release when ready."** (dry-run mode)
+
+See Sections 9/10 of the specialist release skills for the per-artefact result table format.
+
+---
+
 ## 1. What This Repository Is
 
 This is the **entry point** for releasing any WCP artefact — taking it from a
@@ -145,4 +178,4 @@ When releasing a companion widget + agent together, the order matters:
 | [wcp-ai-release-widget](https://github.com/penrithbeacon/wcp-ai-release-widget) | Release a WCP widget | [AI-SKILL.md](https://github.com/penrithbeacon/wcp-ai-release-widget/blob/main/AI-SKILL.md) |
 | [wcp-ai-release-agent](https://github.com/penrithbeacon/wcp-ai-release-agent) | Release a WCP agent | [AI-SKILL.md](https://github.com/penrithbeacon/wcp-ai-release-agent/blob/main/AI-SKILL.md) |
 | [wcp-ai-build](https://github.com/penrithbeacon/wcp-ai-build) | Build entry point | [AI-SKILL.md](https://github.com/penrithbeacon/wcp-ai-build/blob/main/AI-SKILL.md) |
-| [wcp-ai-automation](https://github.com/penrithbeacon/wcp-ai-automation) | Legacy widget documentation standards | Superseded by wcp-ai-release-widget |
+| [wcp-ai-release-widget](https://github.com/penrithbeacon/wcp-ai-release-widget) `standards/` | Widget build spec, audit checklist, release workflow, index format | Migrated from retired wcp-ai-automation |
